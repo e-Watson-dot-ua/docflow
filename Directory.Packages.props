@@ -1,0 +1,11 @@
+<Project>
+  <!-- Central Package Management: NuGet versions are defined here only.
+       Projects reference packages without a Version attribute. -->
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- Package versions are added as projects are created -->
+  </ItemGroup>
+</Project>
