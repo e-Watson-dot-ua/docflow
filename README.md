@@ -1,18 +1,18 @@
 # DocFlow
 
-Multi-tenant document management SaaS built with **.NET 10** and **Microsoft Azure**.
+DocFlow is a multi-tenant document management SaaS application. It uses **.NET 10** and **Microsoft Azure**.
 
-A learning and portfolio project focused on real, hands-on cloud architecture: deploying, securing, and monitoring a .NET system on Azure — starting as a modular monolith and evolving into microservices.
+DocFlow is a learning and portfolio project. It shows real cloud architecture on Azure: the deployment, security, and monitoring of a .NET system. The system starts as a modular monolith. Later, one module becomes a separate microservice.
 
-> 🚧 **Status:** Phase 0 — project setup. Nothing to run yet.
+> 🚧 **Status:** Phase 0 — project setup. You cannot run the application yet.
 
 ## Goals
 
-- Build and deploy a real cloud application on Azure
-- Use a modern .NET stack: .NET Aspire, minimal APIs, EF Core, OpenTelemetry
-- Practice cloud architecture patterns: multi-tenancy, CQRS, event-driven messaging, API gateway, microservice extraction
-- Infrastructure as Code (Bicep) and CI/CD (GitHub Actions)
-- Keep cloud costs under $10/month
+- Build a real cloud application and deploy it to Azure.
+- Use a modern .NET stack: .NET Aspire, minimal APIs, EF Core, and OpenTelemetry.
+- Use cloud architecture patterns: multi-tenancy, CQRS, event-driven messages, an API gateway, and the extraction of a microservice.
+- Use Infrastructure as Code (Bicep) and CI/CD (GitHub Actions).
+- Keep the Azure cost below $10 each month.
 
 ## Tech Stack
 
@@ -20,15 +20,15 @@ A learning and portfolio project focused on real, hands-on cloud architecture: d
 |------|-----------|---------------|
 | Runtime | .NET 10, ASP.NET Core | Azure Container Apps |
 | Orchestration | .NET Aspire, Azure Developer CLI (`azd`) | — |
-| API Gateway | YARP | Azure Container Apps |
+| API gateway | YARP | Azure Container Apps |
 | Database | PostgreSQL, EF Core | Azure Database for PostgreSQL |
 | File storage | Azure Blob Storage SDK | Azure Blob Storage |
-| Messaging | MassTransit | Azure Service Bus |
-| Real-time | SignalR | Azure SignalR Service |
+| Messages | MassTransit | Azure Service Bus |
+| Real-time updates | SignalR | Azure SignalR Service |
 | Identity | OpenID Connect / JWT | Microsoft Entra ID |
 | Secrets | Managed Identity | Azure Key Vault |
 | Observability | OpenTelemetry, Serilog | Application Insights |
-| IaC / CI/CD | Bicep, GitHub Actions | Azure Resource Manager |
+| IaC and CI/CD | Bicep, GitHub Actions | Azure Resource Manager |
 
 ## Architecture
 
@@ -40,7 +40,7 @@ A learning and portfolio project focused on real, hands-on cloud architecture: d
        ┌───────────┴────────────┐
        ▼                        ▼
  ┌───────────┐          ┌─────────────────┐
- │ DocFlow   │          │ Document        │   (extracted in Phase 4)
+ │ DocFlow   │          │ Document        │   (separate service from Phase 4)
  │ API       │          │ Service         │
  │ (modules) │          └────────┬────────┘
  └─────┬─────┘                   │
@@ -52,26 +52,31 @@ A learning and portfolio project focused on real, hands-on cloud architecture: d
            └─────────────┘
 ```
 
-Detailed design: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) (coming soon).
+The YARP gateway sends all client requests to the correct service. The API and the Document Service send events through Azure Service Bus. The Worker receives these events and processes them.
+
+For the full design, see [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md). This document is not available yet.
 
 ## Roadmap
 
-- [ ] **Phase 0** — Azure account, tooling, repository setup
-- [ ] **Phase 1** — Solution structure, Aspire, PostgreSQL, first Azure deployment
-- [ ] **Phase 2** — Core APIs, Blob Storage, tenant isolation, Entra ID, Key Vault
-- [ ] **Phase 3** — Service Bus events, audit log, SignalR dashboard
-- [ ] **Phase 4** — Extract Documents into a microservice
-- [ ] **Phase 5** — Observability, CI/CD
-- [ ] **Phase 6** — Tests, documentation, polish
+- [ ] **Phase 0** — Azure account, tools, and repository setup
+- [ ] **Phase 1** — Solution structure, Aspire, PostgreSQL, and the first deployment to Azure
+- [ ] **Phase 2** — Core APIs, Blob Storage, tenant isolation, Entra ID, and Key Vault
+- [ ] **Phase 3** — Service Bus events, audit log, and SignalR dashboard
+- [ ] **Phase 4** — Move the Documents module into a separate microservice
+- [ ] **Phase 5** — Observability and CI/CD
+- [ ] **Phase 6** — Tests, documentation, and final improvements
 
-## Prerequisites
+## Requirements
+
+Install these tools:
 
 - [.NET 10 SDK](https://dotnet.microsoft.com/download)
-- [Docker Desktop](https://www.docker.com/products/docker-desktop/) (or Podman)
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) or Podman
 - [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)
 - [Azure Developer CLI (`azd`)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
-- An Azure subscription (free account works)
 
-## Getting Started
+You also need an Azure subscription. A free account is sufficient.
 
-Instructions will be added in Phase 1.
+## How to Start
+
+Phase 1 will add the instructions to build and run DocFlow.
